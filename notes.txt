@@ -1,0 +1,1 @@
+middleware: Functions that have access to the req, res objects and can operate within the req,res

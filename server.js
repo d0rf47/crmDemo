@@ -1,14 +1,18 @@
 import express from 'express';
-import { connect } from 'mongoose';
-import { json } from 'body-parser';
+const mongoose = require("mongoose");
+const bodyParser = require('body-parser')
 import routes from './src/routes/crmRoutes';
 require("dotenv").config({path:'./config/keys.env'});
-const dbURL = `mongodb+srv://admin:${process.env.pass}@cluster0-fbjsx.azure.mongodb.net/test?retryWrites=true&w=majority`
+const dbURL = `mongodb+srv://admin:${process.env.pass}@cluster0-fbjsx.azure.mongodb.net/CRM?retryWrites=true&w=majority`
 const PORT = process.env.PORT || 4000;
 const app = express();
-app.use(json());
 
-connect(dbURL,{ useUnifiedTopology: true, useNewUrlParser: true })
+//Mongoose Connection 
+mongoose.Promise = global.Promise;
+mongoose.connect(dbURL,
+    {   useUnifiedTopology: true,
+        useNewUrlParser: true
+    })
     .then(()=>
     {
         console.log('Database Connected');
@@ -20,6 +24,11 @@ connect(dbURL,{ useUnifiedTopology: true, useNewUrlParser: true })
     }
 );
 
+//Parses incoming data into a readable JSON format
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+//Imported Routes
 routes(app);
 
 app.get('/', (req,res)=>
@@ -28,7 +37,7 @@ app.get('/', (req,res)=>
 })
 
 
-
+//Server Connection
 app.listen(PORT, ()=>
 {
     console.log(`Server listening on ${PORT} `);
