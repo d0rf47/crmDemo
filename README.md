@@ -1,3 +1,3 @@
-# crmDemo
+# CRM Demo
 
 ## NodeJS MongoDB React 

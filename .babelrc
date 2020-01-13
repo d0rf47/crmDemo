@@ -1,0 +1,9 @@
+
+{
+    "presets": [
+        "env",
+        "stage-3"
+    ]
+}
+
+//instructs babel for the tranpilation process which presets we are using
