@@ -1,6 +1,6 @@
 import express from 'express';
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser')
+import bodyParser from 'body-parser';
 import routes from './src/routes/crmRoutes';
 require("dotenv").config({path:'./config/keys.env'});
 const dbURL = `mongodb+srv://admin:${process.env.pass}@cluster0-fbjsx.azure.mongodb.net/CRM?retryWrites=true&w=majority`

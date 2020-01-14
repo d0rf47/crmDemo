@@ -1,4 +1,11 @@
 //Contains main contact routes for adding, deleting or getting a contact
+import { 
+    addNewContact, 
+    getContacts,
+    getContactID,
+    updateContact
+    } from '../controllers/crmControllers';
+
 const Routes = (app) =>
     {
         app.route('/contact')
@@ -7,19 +14,16 @@ const Routes = (app) =>
                 console.log(`Request from ${req.originalUrl}`)
                 console.log(`Request type  ${req.method}`)
                 next();                
-            }, (req,res,next)=>{
-                res.send("GET Request successful")
-            })
-            .post((req,res)=>
-            {
-                res.send("POST Request successful")
-            });
+            }, getContacts)
+
+            .post(addNewContact);
         
         app.route('/contact/:contactID')
-            .put((req,res)=>
-            {
-                res.send("PUT Request successful")
-            })
+
+            .get(getContactID)
+
+            .put(updateContact)
+            
             .delete((req,res)=>
             {
                 res.send("DELETE Request successful")
