@@ -28,3 +28,10 @@ export const updateContact = (req, res) =>
     Contact.findOneAndUpdate( { _id: req.params.contactID}, req.body, { new: true, useFindAndModify: false},
         (err, contact) => (err) ? res.send(err) : res.json(contact));
 };
+
+export const deleteContact = (req, res) =>
+{
+    Contact.remove( { _id: req.params.contactID},
+        (err, contact) => (err) ? res.send(err) : res.json({message: `Contact Removed Successful`}));
+};
+
